@@ -1,0 +1,10 @@
+html {
+    background-color: bisque;
+}
+
+.bookshelf {
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
+    background-color: white;
+}
+
