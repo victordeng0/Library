@@ -1,3 +1,4 @@
+
 let myLibrary = [];
 
 function Book(title, author, pages, read){
@@ -30,8 +31,15 @@ const btn = document.querySelector('button');
 btn.addEventListener('click', () => {
     readerPrompt()
     const newBook = new Book(title, author, pages, read)
-    myLibrary.push(newBook);
+    myLibrary.push(newBook.title, newBook.author, newBook.pages, newBook.read);
     console.log(myLibrary)
+
+    const bookShelf = document.querySelector('#bookshelf')
+    const logBook = document.createElement('p')
+    logBook.classList.add('bookmark')
+    logBook.textContent = myLibrary
+    bookshelf.appendChild(logBook)
     
 })
+
 
