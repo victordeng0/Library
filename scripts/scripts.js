@@ -1,5 +1,5 @@
 
-let myLibrary = [];
+
 
 function Book(title, author, pages, read){
     this.title = title
@@ -26,20 +26,41 @@ function readerPrompt() {
 }
 
 
-const btn = document.querySelector('button');
+const btn = document.querySelector('#new');
 
 btn.addEventListener('click', () => {
+    let myLibrary = [];
     readerPrompt()
     const newBook = new Book(title, author, pages, read)
-    myLibrary.push(newBook.title, newBook.author, newBook.pages, newBook.read);
+    myLibrary.push(newBook);
     console.log(myLibrary)
+    
+    for(i = 0; i < myLibrary.length; i++){
+        const bookShelf = document.querySelector('#bookshelf')
+        const logBook = document.createElement('p')
+        logBook.classList.add('bookmark' + i)
+        logBook.textContent = myLibrary[i].title + '\n' + myLibrary[i].author + '\n' + myLibrary[i].pages.toString() +'\n' + myLibrary[i].read.toString()
+        bookshelf.appendChild(logBook)
+        console.log(myLibrary[i].title, myLibrary[i].author, myLibrary[i].pages, myLibrary[i].read)
 
-    const bookShelf = document.querySelector('#bookshelf')
-    const logBook = document.createElement('p')
-    logBook.classList.add('bookmark')
-    logBook.textContent = myLibrary
-    bookshelf.appendChild(logBook)
+        const remove = document.querySelector('.bookmark' + i)
+        const removeButton = document.createElement('button')
+        removeButton.addEventListener('click', () => {
+            bookshelf.removeChild(logBook)
+            bookshelf.removeChild(removeButton)
+        })
+        removeButton.classList.add('remove' + i)
+        removeButton.textContent = 'REMOVE'
+        bookshelf.appendChild(removeButton)
+    }
+
     
 })
 
 
+
+// const bookShelf = document.querySelector('#bookshelf')
+// const logBook = document.createElement('p')
+// logBook.classList.add('bookmark')
+// logBook.textContent = myLibrary
+// bookshelf.appendChild(logBook)
