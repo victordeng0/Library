@@ -1,6 +1,4 @@
 
-
-
 function Book(title, author, pages, read){
     this.title = title
     this.author = author
@@ -16,45 +14,66 @@ function addBookToLibrary() {
 }
 
 
+function form(){
+    const bookId = document.getElementById('bookId')
+    const authorId = document.getElementById('authorId')
+    const pagesId = document.getElementById('pagesId')
+    const checkboxId = document.getElementById('checkboxId')
 
-function readerPrompt() {
-    title = prompt('What is the name of your Book?');
-    author = prompt('Who is the author?');
-    pages = prompt('How many pages are in your book?');
-    read = prompt('Did you finish reading the book?');
-    
+    title = bookId.value
+    author = authorId.value
+    pages = pagesId.value
+    read = checkboxId.value
 }
-
 
 const btn = document.querySelector('#new');
 
+let myLibrary = [];
+
 btn.addEventListener('click', () => {
-    let myLibrary = [];
-    readerPrompt()
-    const newBook = new Book(title, author, pages, read)
+    //let myLibrary = []
+   
+    form()
+
+    let newBook = new Book(title, author, pages, read)
     myLibrary.push(newBook);
     console.log(myLibrary)
-
+    let bookShelf = document.querySelector('#bookshelf')
+    bookShelf.innerHTML = "";
     
     
-    for(i = 0; i < myLibrary.length; i++){
-        const bookShelf = document.querySelector('#bookshelf')
-        const logBook = document.createElement('p')
-        logBook.classList.add('bookmark' + i)
-        logBook.innerHTML = myLibrary[i].title + '<br></br>' + myLibrary[i].author + '<br></br>' + myLibrary[i].pages.toString() +'<br></br>' + myLibrary[i].read + '<br></br>' + '<button id="remove">REMOVE</button>'
+    for(let i = 0; i < myLibrary.length; i++){
         
-        bookshelf.appendChild(logBook)
+        let bookShelf = document.querySelector('#bookshelf')
+        
+
+        let logBook = document.createElement('p')
+        
+        logBook.classList.add('bookmark' + i)
+
+        
+        logBook.innerHTML = myLibrary[i].title + '<br></br>' + myLibrary[i].author + '<br></br>' + myLibrary[i].pages.toString() +'<br></br>' + '<input type="checkbox"/>' + myLibrary[i].read + '<br></br>'
+        
+        bookShelf.appendChild(logBook)
         console.log(myLibrary[i].title, myLibrary[i].author, myLibrary[i].pages, myLibrary[i].read)
 
-        const remove = document.querySelector('#remove')
-        // const removeButton = document.createElement('button')
-        remove.addEventListener('click', () => {
+        
+        const remove = document.querySelector('.bookmark' + i)
+        const removeButton = document.createElement('button')
+            
+        removeButton.addEventListener('click', () => {
             bookshelf.removeChild(logBook)
-            // bookshelf.removeChild(removeButton)
+            //bookshelf.removeChild(removeButton)
+            myLibrary.splice(i, 1)
         })
-        // removeButton.classList.add('remove' + i)
-        // removeButton.textContent = 'REMOVE'
-        // remove.appendChild(removeButton)
+        removeButton.classList.add('remove' + i)
+        removeButton.textContent = 'REMOVE'
+        remove.appendChild(removeButton)
+            
+        console.log(`This is the  i value: ${i}`)
+        console.log(`This is the class: bookmark`+i)
+
+       
     }
 
     
