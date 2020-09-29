@@ -80,6 +80,21 @@ btn.addEventListener('click', () => {
 })
 
 
+var hideButton = document.querySelector('.modal')
+
+hideButton.addEventListener('click', () => {
+    
+    var modal = document.querySelector('.hidden')
+    
+    if (modal.classList.contains('hide')){
+        modal.classList.remove('hide')
+    } else {
+        modal.classList.add('hide')
+    }
+    
+    
+    
+})
 
 // const bookShelf = document.querySelector('#bookshelf')
 // const logBook = document.createElement('p')
